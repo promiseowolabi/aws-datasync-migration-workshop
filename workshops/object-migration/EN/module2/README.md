@@ -1,6 +1,6 @@
 # **AWS DataSync**
 
-### NFS server migration using AWS DataSync and AWS Storage Gateway
+### Object store migration using AWS DataSync from Scality to Amazon S3
 
 © 2019 Amazon Web Services, Inc. and its affiliates. All rights reserved.
 This sample code is made available under the MIT-0 license. See the LICENSE file.
@@ -10,11 +10,11 @@ Errors or corrections? Contact [jeffbart@amazon.com](mailto:jeffbart@amazon.com)
 ---
 
 # Module 2
-## Initial file copy to S3 using DataSync
+## Initial copy from Scality to S3 using DataSync
 
 In this module, you will activate the DataSync agent deployed in the on-premises region, create DataSync locations, and then create a DataSync task to copy data from the source location to the destination location.
 
-DataSync tasks perform the job of copying data and require two &quot;locations&quot; – a source and a destination.  With DataSync, a location is an endpoint where files reside or will be copied to.  A location can be an NFS export, an SMB share, an Amazon S3 bucket, or an Amazon EFS file system.  Location objects are independent of tasks and a single location can be used with multiple tasks.
+DataSync tasks perform the job of copying data and require two &quot;locations&quot; – a source and a destination.  With DataSync, a location is an endpoint where files/objects reside or will be copied to.  A location can be an NFS export, an SMB share, an object storage bucket, an Amazon S3 bucket, or an Amazon EFS file system.  Location objects are independent of tasks and a single location can be used with multiple tasks.
 
 ![](../images/mod2arch.png)
 
@@ -39,13 +39,13 @@ Although the agent instance was created in the previous module, before it can be
 
 7. Enter an Agent name if desired, then click **Create agent**.
 
-#### 2. Create NFS location
+#### 2. Create object storage location
 
 1. On the left-hand side of the DataSync service page, click on **Locations** and then click on **Create location**.
 
-2. Create a location for the on-premises NFS server.  Select **Network File System (NFS)** from the _Location type_ drop-down.
+2. Create a location for the on-premises object storage bucket.  Select **Object storage** from the _Location type_ drop-down.
 3. From the _Agents_ drop-down, select the DataSync agent that was created in the previous step.
-4. Enter the **Private IP address** of the NFS server, per the CloudFormation outputs in the **on-premises** region.  This was the same IP address used to mount the NFS export on the Application server, in the previous module.  The is the IP address that the DataSync agent will use to mount the NFS export.
+4. Enter the **Private IP address** of the object storage **S3Server**, per the CloudFormation outputs in the **on-premises** region.  This was the same IP address used to mount the NFS export on the Application server, in the previous module.  The is the IP address that the DataSync agent will use to mount the NFS export.
 5. Under _Mount path_, enter &quot;/media/data&quot;.
 
   ![](../images/mod2ds3.png)
