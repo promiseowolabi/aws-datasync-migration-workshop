@@ -102,10 +102,12 @@ If using EC2 Instance Connect or Session Manager, click **Connect**.  A new tab 
 ## Validation Step
 
 In the CLI for the Application server, run the following commands to verify the files on the object store.  Use the **S3ServerPrivateIP** value from the **on-premises** CloudFormation stack output.
+    $ aws configure set aws_access_key_id AccessKey --profile scality
+    $ aws configure set aws_secret_access_key SecretKey --profile scality
+    $ aws s3 ls s3://data/images/ --endpoint-url http://<S3ServerPrivateIP>:8000/ --profile scality
+    $ aws s3 ls s3://data/images/ --endpoint-url http://<S3ServerPrivateIP>:8000/ --profile scality | wc -l
 
-    $ aws s3 mb s3://data/ --endpoint-url http://<S3ServerPrivateIP>:8000/ --profile scality
-
-In the /mnt/data/images folder you should see 200 image files, as shown below.  These image files represent the object store data that will be migrated to the S3 bucket in the in-cloud region.
+In the bucket s3://data you should see 200 image files, as shown below.  These image files represent the object store data that will be migrated to the S3 bucket in the in-cloud region.
 
 ![](../images/mod1cli1.png)
 

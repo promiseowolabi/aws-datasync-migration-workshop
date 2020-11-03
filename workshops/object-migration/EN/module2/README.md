@@ -45,12 +45,15 @@ Although the agent instance was created in the previous module, before it can be
 
 2. Create a location for the on-premises object storage bucket.  Select **Object storage** from the _Location type_ drop-down.
 3. From the _Agents_ drop-down, select the DataSync agent that was created in the previous step.
-4. Enter the **Private IP address** of the object storage **S3Server**, per the CloudFormation outputs in the **on-premises** region.  This was the same IP address used to mount the NFS export on the Application server, in the previous module.  The is the IP address that the DataSync agent will use to mount the NFS export.
-5. Under _Mount path_, enter &quot;/media/data&quot;.
+4. For _Server_ enter the **Private IP address** of the object storage **S3Server**, per the CloudFormation outputs in the **on-premises** region.  This was the same IP address used to access the objects from the Application server, in the previous module.
+5. Under _Bucket name_, enter &quot;data&quot;.
+6. Under _Folder_, enter &quot;images&quot;. 
+7. Expand _Additional settings_ and select &quot;HTTP&quot;. Under _Server port_ enter &quot;8000&quot;.
+8. For _Access Key_ and _Secret key_ enter &quot;AccessKey&quot; and &quot;SecretKey&quot;.
 
   ![](../images/mod2ds3.png)
 
-6. Click **Create location**.
+9. Click **Create location**.
 
 #### 3. Create S3 location
 
@@ -59,14 +62,14 @@ Although the agent instance was created in the previous module, before it can be
 2. Create a location for the S3 bucket.  Select **Amazon S3 bucket** from the _Location type_ drop-down.
 3. From the _S3 bucket_ drop-down, select the S3 bucket that starts with **data-migration-workshop** and is followed by a long GUID.
 4. Keep the S3 storage class as **Standard**.
-4. Under _Folder_, enter &quot;/&quot;.  This will copy all files to the top-level of the bucket.
-5. Under _IAM role_, select the S3 bucket IAM role that starts with **DataMigrationWorkshop-inCloud**.  The full name of the role can be found in the outputs for the in-cloud CloudFormation stack.
+5. Under _Folder_, enter &quot;images&quot;. 
+6. Under _IAM role_, select the S3 bucket IAM role that starts with **DataMigrationWorkshop-inCloud**.  The full name of the role can be found in the outputs for the in-cloud CloudFormation stack.
 
   ![](../images/mod2ds4.png)
 
-6. Click **Create location**.
+7. Click **Create location**.
 
-On the left-side of the page, click **Locations** again.  You should now have two locations listed.  One for the NFS server and one for the S3 bucket.
+On the left-side of the page, click **Locations** again.  You should now have two locations listed.  One for the object storage and one for the S3 bucket.
 
 ![](../images/mod2ds5.png)
 
@@ -75,7 +78,7 @@ On the left-side of the page, click **Locations** again.  You should now have tw
 1. On the left-hand side of the DataSync service page, click on **Tasks** and then click on **Create task**.
 
 2. Under _Source location options_, select **Choose an existing location**.
-3. Under the _Existing locations_ drop-down, select the NFS server location you created previously.
+3. Under the _Existing locations_ drop-down, select the object storage location you created previously.
 4. Click **Next.**
 
   ![](../images/mod2ds6.png)
@@ -83,8 +86,9 @@ On the left-side of the page, click **Locations** again.  You should now have tw
 5. Under _Destination location options_, select **Choose an existing location**.
 6. Under the _Existing locations_ drop-down, select the S3 bucket location you created previously.
 7. Click **Next.**
-8. Under the **Verify data** drop-down, select **Verify only the data transferred**. Keep all other options as-is and then click **Next.**
-9. Click **Create task.**
+8. Under the **Verify data** drop-down, select **Verify only the data transferred**. 
+9. Under _Task Logging_ and _CloudWatch log group_ select **dmLogGroup** from the drop-down list. Keep all other options as-is and then click **Next.**
+10. Click **Create task.**
 
 #### 5. Run the task
 
@@ -98,20 +102,20 @@ On the left-side of the page, click **Locations** again.  You should now have tw
 
   ![](../images/mod2ds8.png)
 
-5. As the task runs, the execution status will progress from &quot;Launching&quot; to &quot;Preparing&quot; to &quot;Transferring&quot; to &quot;Verifying&quot; and finally to &quot;Success&quot;.  The task execution will report statistics on the job, as shown below.  It will take a few minutes for the task to complete.  Once the task has finished, notice that 202 files were transferred.  This is the 200 files in the data set along with the two folders in the path that we specified.
+5. As the task runs, the execution status will progress from &quot;Launching&quot; to &quot;Preparing&quot; to &quot;Transferring&quot; to &quot;Verifying&quot; and finally to &quot;Success&quot;.  The task execution will report statistics on the job, as shown below.  It will take a few minutes for the task to complete.  Once the task has finished, notice that 200 files were transferred.  This is the 200 files in the data set along with the two folders in the path that we specified.
 
   ![](../images/mod2ds9.png)
 
 ## Validation Step
 
-From the in-cloud region management console, select **Services** then **S3.**  In the bucket list, click on the **data-migration-workshop** bucket.  You should see a top-level folder named &quot;images&quot;. Inside this folder should be the 200 .jpg files from the NFS server.
+From the in-cloud region management console, select **Services** then **S3.**  In the bucket list, click on the **data-migration-workshop** bucket.  You should see a top-level folder named &quot;images&quot;. Inside this folder should be the 200 .jpg files from the on-premises object storage.
 
 ![](../images/mod2validate.png)
 
 ## Module Summary
 
-In this module you successfully activated the DataSync agent and created a task to copy files from the on-premises NFS server into the S3 bucket.  You then verified that the files were copied successfully.
+In this module you successfully activated the DataSync agent and created a task to copy files from the on-premises object storage into the AWS S3 bucket.  You then verified that the files were copied successfully.
 
-In the next module, you will configure the on-premises File Gateway to connect to the S3 bucket, providing access to the in-cloud files via NFS.
+In the next module, you will configure the in-cloud Application server to connect to the S3 bucket, providing access to the in-cloud object via S3.
 
 Go to [Module 3](../module3/).
