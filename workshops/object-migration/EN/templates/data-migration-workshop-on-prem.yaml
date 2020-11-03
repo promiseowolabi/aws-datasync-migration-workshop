@@ -196,7 +196,7 @@ Resources:
                 aws configure set aws_secret_access_key SecretKey --profile scality
                 aws --profile scality s3 mb s3://data --endpoint-url http://127.0.0.1:8000/
                 mkdir -p /media/data/images
-                for i in {00001..00200}; do
+                for i in {00001..00210}; do
                   aws s3 cp s3://aft-vbi-pds/bin-images/$i.jpg /media/data/images/ >> /tmp/sync
                 done
                 for i in {00001..00200}; do
