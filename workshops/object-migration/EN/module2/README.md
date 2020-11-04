@@ -47,7 +47,7 @@ Although the agent instance was created in the previous module, before it can be
 3. From the _Agents_ drop-down, select the DataSync agent that was created in the previous step.
 4. For _Server_ enter the **Private IP address** of the object storage **S3Server**, per the CloudFormation outputs in the **on-premises** region.  This was the same IP address used to access the objects from the Application server, in the previous module.
 5. Under _Bucket name_, enter &quot;data&quot;.
-6. Under _Folder_, enter &quot;images&quot;. 
+6. Under _Folder_, enter &quot;/&quot;. 
 7. Expand _Additional settings_ and select &quot;HTTP&quot;. Under _Server port_ enter &quot;8000&quot;.
 8. For _Access Key_ and _Secret key_ enter &quot;AccessKey&quot; and &quot;SecretKey&quot;.
 
@@ -62,7 +62,7 @@ Although the agent instance was created in the previous module, before it can be
 2. Create a location for the S3 bucket.  Select **Amazon S3 bucket** from the _Location type_ drop-down.
 3. From the _S3 bucket_ drop-down, select the S3 bucket that starts with **data-migration-workshop** and is followed by a long GUID.
 4. Keep the S3 storage class as **Standard**.
-5. Under _Folder_, enter &quot;images&quot;. 
+5. Under _Folder_, enter &quot;/&quot;. 
 6. Under _IAM role_, select the S3 bucket IAM role that starts with **DataMigrationWorkshop-inCloud**.  The full name of the role can be found in the outputs for the in-cloud CloudFormation stack.
 
   ![](../images/mod2ds4.png)

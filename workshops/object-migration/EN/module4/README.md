@@ -20,11 +20,11 @@ In this module, you will perform an incremental data transfer using DataSync.  T
 
 #### 1. Create some new file on the on-premises bucket
 
-1. In the on-premises region, from the CLI for the Application server, run the following command to create some new object in the Scality bucket:
+1. In the on-premises region, from the CLI for the **S3Server**, run the following command to create some new object in the Scality bucket:
 
-        $ for i in {00201..00210}; do 
-            aws s3 cp /media/data/images/$i.jpg s3://data/images/ --endpoint-url http://<S3ServerPrivateIP>:8000/ --profile scality >> /tmp/sync 
-          done
+        $ aws configure set aws_access_key_id AccessKey --profile scality
+        $ aws configure set aws_secret_access_key SecretKey --profile scality
+        $ for i in {00201..00210}; do aws s3 cp /media/data/images/$i.jpg s3://data/images/ --endpoint-url http://<S3ServerPrivateIP>:8000/ --profile scality >> /tmp/sync; done
 
 #### 2. Copy the new file to the S3 bucket
 
@@ -43,7 +43,7 @@ It will take a few minutes for the task to complete.  When the task completes, t
 
 If you take a look at the S3 bucket, you see that the new objects is there, just as expected:
 
-![](../images/mod4s31.png)
+![](../images/mod4ds3.png)
 
 ## Module Summary
 

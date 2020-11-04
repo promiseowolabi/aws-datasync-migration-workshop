@@ -10,7 +10,7 @@ Errors or corrections? Contact [jeffbart@amazon.com](mailto:jeffbart@amazon.com)
 ---
 
 # Module 3
-## Access S3 bucket in-cloud using Application server
+## Securely access data on in-cloud region S3 bucket
 
 You now have the files from the object storage copied to your Amazon S3 bucket.  In this module, you will configure the Application server in the in-cloud region to connect to your S3 bucket and provide access to the objects in the bucket.
 
@@ -32,6 +32,8 @@ In AWS access to resources is administered by the Identity and Management servic
 
         $ aws s3 ls
 
+  ![](../images/mod3s1.png)
+ 
 7. This will fail and return: 
 
 ```An error occurred (AccessDenied) when calling the ListBuckets operation: Access Denied```
@@ -66,9 +68,7 @@ In AWS access to resources is administered by the Identity and Management servic
     ]
 }
 ```
-10. The policy limits access to only the &quot;data-migration-workshop&quot; bucket. This will give the application server just enough access to your S3 resources.
-
-  ![](../images/mod3fgw1.png)
+The policy limits access to only the &quot;data-migration-workshop&quot; bucket. This will give the application server just enough access to your S3 resources.
 
 #### 2. Accessing the data in the Amazon S3 bucket
 
@@ -78,7 +78,7 @@ In AWS access to resources is administered by the Identity and Management servic
         $ aws s3 ls s3://data-migration-workshop-e5819550-1dd0-11eb-9c20-065bc1dc5e74/
         $ aws s3 ls s3://data-migration-workshop-e5819550-1dd0-11eb-9c20-065bc1dc5e74/images/
 
-  ![](../images/mod3fgw2.png)
+  ![](../images/mod3s2.png)
 
 ## Validation Step
 
@@ -86,7 +86,7 @@ Run the following command to verify that all the objects were transferred
 
     $ aws s3 ls s3://data-migration-workshop-e5819550-1dd0-11eb-9c20-065bc1dc5e74/images/ | wc -l
 
-You should see the same number of object in the AWS S3 bucket - 200
+You should see the same number of object in the AWS S3 bucket.
 
 ## Module Summary
 
@@ -94,6 +94,6 @@ In this module you successfully verified the permission granted to the Applicati
 
 Remember that our ultimate goal in this workshop is to shut off the on-premises Object storage and free up storage resources.  In a production environment, this would typically involve a &quot;cutover point&quot;, where there is momentary downtime to change over to the in-cloud Application server and the new storage, which in this workshop is the Amazon S3 bucket.  However, there are usually new object being created while a migration occurs, or shortly after, requiring another incremental transfer copy before cutover.
 
-In the next module, you&#39;ll do one more incremental copy before the final cutover to the File Gateway share.
+In the next module, you&#39;ll do one more incremental copy before the final cutover to the Amazon S3.
 
 Go to [Module 4](../module4/).

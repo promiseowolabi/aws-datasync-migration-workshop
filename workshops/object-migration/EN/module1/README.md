@@ -107,7 +107,7 @@ In the CLI for the Application server, run the following commands to verify the 
     $ aws s3 ls s3://data/images/ --endpoint-url http://<S3ServerPrivateIP>:8000/ --profile scality
     $ aws s3 ls s3://data/images/ --endpoint-url http://<S3ServerPrivateIP>:8000/ --profile scality | wc -l
 
-In the bucket s3://data you should see 200 image files, as shown below.  These image files represent the object store data that will be migrated to the S3 bucket in the in-cloud region.
+In the bucket s3://data images folder you should see 200 image objects, as shown below.  These images represent the object store data that will be migrated to the S3 bucket in the in-cloud region.
 
 ![](../images/mod1cli1.png)
 

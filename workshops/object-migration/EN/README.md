@@ -25,7 +25,7 @@ This workshop will walk you through this scenario, using CloudFormation template
 - Registering and configuring DataSync agent
 - Configure CloudWatch logging for DataSync
 - Planning a migration of object using DataSync
-- Using DataSync with multiple tasks running in parallel
+- Using DataSync to perform incremental updates
 
 ## Prerequisites
 
@@ -54,7 +54,7 @@ This workshop consists of the following five modules:
 
 - [Module 1](module1/)  - Deploy resources in the on-premises and in-cloud regions
 - [Module 2](module2/) - Initial copy from Scality to S3 using DataSync
-- [Module 3](module3/)  - Access S3 bucket in-cloud using Application server
+- [Module 3](module3/)  - Securely access data on in-cloud region S3 bucket
 - [Module 4](module4/)  - One last incremental copy before cutover
 - [Module 5](module5/) - Cutover to AWS S3 and clean up resources
 
