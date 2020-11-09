@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: AWS DataSync Workshop - Object Storage Migration - On-Premises Region
+Description: AWS DataSync Workshop - Scality Object Migration - On-Premises Region
 Metadata:
   License:
     Description: |

@@ -5,7 +5,7 @@
 © 2019 Amazon Web Services, Inc. and its affiliates. All rights reserved.
 This sample code is made available under the MIT-0 license. See the LICENSE file.
 
-Errors or corrections? Contact [jeffbart@amazon.com](mailto:jeffbart@amazon.com).
+Errors or corrections? Contact [owolabip@amazon.com](mailto:owolabipScalityssdfsdf@amazon.com).
 
 ---
 
@@ -49,6 +49,6 @@ If you take a look at the S3 bucket, you see that the new objects is there, just
 
 In this module you added some new objects to the object storage bucket prior to cutover.  You then ran the DataSync task a second time to pick up any object changes and copy them to S3.  Finally, you checked the S3 bucket to confirm that the new files were transfered.
 
-With all of the data copied from the NFS server to S3, you are now ready to perform the cutover.
+With all of the data copied from the Scality object storage to S3, you are now ready to perform the cutover.
 
 Go to [Module 5](../module5/).
